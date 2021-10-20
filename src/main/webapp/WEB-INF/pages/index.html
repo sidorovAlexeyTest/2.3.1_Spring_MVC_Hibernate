@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sidorov</title>
+</head>
+<body>
+<h2>Welcome to my web study project</h2>
+<h3>
+    <table border="1">
+        <tr>
+            <td>Id</td>
+            <td>Name</td>
+            <td>Surname</td>
+            <td>Birthdate</td>
+        </tr>
+        <tr data-th-each="user : ${userList}">
+            <td data-th-text="${user.getId()}">...</td>
+            <td data-th-text="${user.getName()}">...</td>
+            <td data-th-text="${user.getSurname()}">...</td>
+            <td data-th-text="${user.getBirthdate()}">...</td>
+        </tr>
+    </table>
+</h3>
+<br>
+<h2>Add new user</h2>
+  <form th:method="POST" th:action="@{/addUser}" th:object="user">
+      <input type="text" th:field="">
+  </form>
+</body>
+</html>
