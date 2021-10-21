@@ -4,13 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import springMVCHibernate.model.User;
 import springMVCHibernate.service.UserService;
 
+import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.util.List;
 
@@ -28,8 +26,24 @@ public class HomeController {
     }
 
     @PostMapping("/addUser")
-    public String addUser(@ModelAttribute("user") User user) {
-        userServiceImpl.add(user.getName(), user.getSurname(), user.getBirthdate());
+    public String addUser(@ModelAttribute(name = "newUser") User newUser) {
+        String userName = new String(newUser.getName().getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
+        String userSurname = new String(newUser.getSurname().getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
+        userServiceImpl.add(userName, userSurname, newUser.getBirthdate());
+        return "redirect:/";
+    }
+
+    @PostMapping("/updateUser/{id}")
+    public String updateUser(@ModelAttribute("user") User user, @PathVariable("id") Long id) {
+        String userName = new String(user.getName().getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
+        String userSurname = new String(user.getSurname().getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
+        userServiceImpl.update(id, userName, userSurname, user.getBirthdate());
+        return "redirect:/";
+    }
+
+    @PostMapping("/deleteUser/{id}")
+    public String deleteUser(@PathVariable("id") Long id) {
+        userServiceImpl.delete(id);
         return "redirect:/";
     }
 }

@@ -26,6 +26,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User update(long id, String name, String surname, Date birthdate) {
+        System.out.println(id);
         return userRepository.saveAndFlush(new User(id, name, surname, birthdate));
     }
 
