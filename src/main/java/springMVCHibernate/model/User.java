@@ -72,7 +72,7 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id && Objects.equals(name, user.name) && Objects.equals(surname, user.surname) && Objects.equals(birthdate, user.birthdate);
+        return Objects.equals(name, user.name) && Objects.equals(surname, user.surname) && Objects.equals(birthdate, user.birthdate);
     }
 
     @Override
@@ -83,8 +83,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", birthdate=" + birthdate +
                 '}';

@@ -41,4 +41,9 @@ public class UserServiceImpl implements UserService{
     public List<User> readAll() {
         return userRepository.findAll();
     }
+
+    @Override
+    public void clearTable() {
+        userRepository.clearTable();
+    }
 }

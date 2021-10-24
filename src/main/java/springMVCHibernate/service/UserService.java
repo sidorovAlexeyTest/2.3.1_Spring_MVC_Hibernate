@@ -11,4 +11,5 @@ public interface UserService {
     User update(long id, String name, String surname, Date birthdate);
     void delete(long id);
     List<User> readAll();
+    void clearTable();
 }
