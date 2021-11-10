@@ -11,8 +11,12 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService{
 
-    @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public User add(String name, String surname, Date birthdate) {
@@ -40,10 +44,5 @@ public class UserServiceImpl implements UserService{
     @Override
     public List<User> readAll() {
         return userRepository.findAll();
-    }
-
-    @Override
-    public void clearTable() {
-        userRepository.clearTable();
     }
 }

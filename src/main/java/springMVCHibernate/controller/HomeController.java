@@ -2,21 +2,23 @@ package springMVCHibernate.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import springMVCHibernate.model.User;
 import springMVCHibernate.service.UserService;
 
 import java.nio.charset.StandardCharsets;
-import java.sql.Date;
 import java.util.List;
 
 @Controller
 public class HomeController {
 
-    @Autowired
     private UserService userServiceImpl;
+
+    @Autowired
+    public HomeController(UserService userServiceImpl) {
+        this.userServiceImpl = userServiceImpl;
+    }
 
     @GetMapping("/")
     public String getHomePage(ModelMap modelMap) {
@@ -33,7 +35,7 @@ public class HomeController {
         return "redirect:/";
     }
 
-    @PostMapping("/updateUser/{id}")
+    @PutMapping("/updateUser/{id}")
     public String updateUser(@ModelAttribute("user") User user, @PathVariable("id") Long id) {
         String userName = new String(user.getName().getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
         String userSurname = new String(user.getSurname().getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
@@ -41,7 +43,7 @@ public class HomeController {
         return "redirect:/";
     }
 
-    @PostMapping("/deleteUser/{id}")
+    @DeleteMapping("/deleteUser/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
         userServiceImpl.delete(id);
         return "redirect:/";

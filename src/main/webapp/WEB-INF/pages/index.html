@@ -14,7 +14,7 @@
             <td>Birthdate</td>
         </tr>
         <tr data-th-each="user : ${userList}">
-            <form action="#" th:action="@{/updateUser/{id}(id=${user.getId()})}" th:method="POST">
+            <form action="#" th:action="@{/updateUser/{id}(id=${user.getId()})}" th:method="PUT">
                 <td data-th-text="${user.getId()}">...</td>
                 <td><input type="text" name="name" th:value="${user.getName()}"/></td>
                 <td><input type="text" name="surname" th:value="${user.getSurname}"/></td>
@@ -22,7 +22,7 @@
                 <td><input type="submit" value="update" id="updateButton"></td>
             </form>
             <td>
-                <form action="#" th:action="@{/deleteUser/{id}(id=${user.getId()})}" th:method="POST">
+                <form action="#" th:action="@{/deleteUser/{id}(id=${user.getId()})}" th:method="DELETE">
                     <input type="hidden" name="delete" value="delete"/>
                     <button type="submit">delete</button>
                 </form>

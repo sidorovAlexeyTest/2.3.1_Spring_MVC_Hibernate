@@ -7,7 +7,4 @@ import springMVCHibernate.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    @Modifying
-    @Query("DELETE FROM User WHERE id > 0")
-    void clearTable();
 }
